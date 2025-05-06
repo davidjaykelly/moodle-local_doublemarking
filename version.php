@@ -24,11 +24,11 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2025050601;        // The current plugin version (Date: YYYYMMDDXX).
+$plugin->version   = 2025050602;        // The current plugin version (Date: YYYYMMDDXX).
 $plugin->requires  = 2023100900;        // Requires Moodle 4.3
 $plugin->component = 'local_doublemarking'; // Full name of the plugin
 $plugin->maturity  = MATURITY_ALPHA;
-$plugin->release   = '0.1.1';
+$plugin->release   = '0.1.2';
 $plugin->dependencies = array(
     'mod_assign' => ANY_VERSION
 );

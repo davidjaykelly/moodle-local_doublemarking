@@ -5,7 +5,7 @@
             <FIELDS>
                 <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
                 <FIELD NAME="assignmentid" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0" SEQUENCE="false"/>
-                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false" COMMENT="The student being marked"/>
+                <FIELD NAME="userid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" SEQUENCE="false" COMMENT="The student being marked (0 for assignment-level settings)"/>
                 <FIELD NAME="marker1" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
                 <FIELD NAME="marker2" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
                 <FIELD NAME="ratifier" TYPE="int" LENGTH="10" NOTNULL="false" SEQUENCE="false"/>
@@ -28,7 +28,8 @@
                 <KEY NAME="ratifier" TYPE="foreign" FIELDS="ratifier" REFTABLE="user" REFFIELDS="id"/>
             </KEYS>
             <INDEXES>
-                <INDEX NAME="assignment_user" UNIQUE="true" FIELDS="assignmentid, userid"/>
+                <INDEX NAME="assignmentid_idx" UNIQUE="false" FIELDS="assignmentid"/>
+                <INDEX NAME="assignment_user_idx" UNIQUE="true" FIELDS="assignmentid, userid" COMMENT="Prevents duplicate user allocations (student can only be allocated once per assignment)"/>
             </INDEXES>
         </TABLE>
     </TABLES>
