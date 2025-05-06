@@ -1,0 +1,25 @@
+# Moodle specific
+/config.php
+/lib/editor/tinymce/extra/tools/temp/
+**/node_modules/
+**/vendor/
+.idea/
+
+# Build files
+**/.sass-cache
+**/build
+.phpunit.result.cache
+
+# Environment specific
+.env
+.DS_Store
+._*
+Desktop.ini
+Thumbs.db
+*.swp
+*.swo
+
+# Plugin specific
+amd/build/
+vendor/
+node_modules/
