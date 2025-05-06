@@ -65,3 +65,12 @@ $string['cannotmodifycompletedmarking'] = 'Cannot modify completed marking';
 $string['insufficientcapability'] = 'Insufficient capability to perform this action';
 $string['markerscannotbesame'] = 'First and second markers cannot be the same person';
 $string['missingallocation'] = 'Marker allocation not found';
+
+// Allocation page strings
+$string['student'] = 'Student';
+$string['actions'] = 'Actions';
+$string['selectmarker'] = 'Select marker';
+$string['allocatemarkersdescription'] = 'Allocate first and second markers for assignment "{$a}".';
+$string['allocationupdated'] = 'Marker allocation updated successfully';
+$string['allocationcreated'] = 'Marker allocation created successfully';
+$string['nostudents'] = 'No students found in this assignment';
