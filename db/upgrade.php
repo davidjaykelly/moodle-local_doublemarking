@@ -79,8 +79,7 @@ function xmldb_local_doublemarking_upgrade($oldversion) {
         $table->add_key('marker2', XMLDB_KEY_FOREIGN, ['marker2'], 'user', ['id']);
         $table->add_key('ratifier', XMLDB_KEY_FOREIGN, ['ratifier'], 'user', ['id']);
 
-        // Add indexes
-        $table->add_index('assignmentid_idx', XMLDB_INDEX_NOTUNIQUE, ['assignmentid']);
+        // Add indexes - note: no need for assignmentid_idx since foreign key creates an index automatically
         $table->add_index('assignment_user_idx', XMLDB_INDEX_UNIQUE, ['assignmentid', 'userid']);
 
         // Create the table
