@@ -1,5 +1,7 @@
 # Moodle Double Marking Plugin
 
+⚠️ **WORK IN PROGRESS** - This plugin is currently in early development and not ready for production use. Features may be incomplete or change significantly.
+
 A comprehensive double marking solution for Moodle assignments that supports blind marking, grade ratification, and marker allocation workflows.
 
 ## Features
