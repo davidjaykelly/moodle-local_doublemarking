@@ -39,10 +39,14 @@ function xmldb_local_doublemarking_upgrade($oldversion) {
         // Define table local_doublemarking_alloc
         $table = new xmldb_table('local_doublemarking_alloc');
 
-        // Set default of 0 for userid field
+        // First remove the old index if it exists - MUST remove indexes before modifying fields
+        $index = new xmldb_index('assignment_user', XMLDB_INDEX_UNIQUE, array('assignmentid', 'userid'));
+        if ($dbman->index_exists($table, $index)) {
+            $dbman->drop_index($table, $index);
+        }
+
+        // Now modify the userid field to have a default of 0
         $field = new xmldb_field('userid', XMLDB_TYPE_INTEGER, '10', null, null, null, '0', 'assignmentid');
-        
-        // Conditionally add default value to userid
         if ($dbman->field_exists($table, $field)) {
             $dbman->change_field_default($table, $field);
         }
@@ -50,13 +54,7 @@ function xmldb_local_doublemarking_upgrade($oldversion) {
         // Update existing records with NULL userid to 0
         $DB->execute("UPDATE {local_doublemarking_alloc} SET userid = 0 WHERE userid IS NULL");
 
-        // First remove the old index if it exists
-        $index = new xmldb_index('assignment_user', XMLDB_INDEX_UNIQUE, array('assignmentid', 'userid'));
-        if ($dbman->index_exists($table, $index)) {
-            $dbman->drop_index($table, $index);
-        }
-
-        // Add new indexes
+        // Add new indexes after field modifications
         $index1 = new xmldb_index('assignmentid_idx', XMLDB_INDEX_NOTUNIQUE, array('assignmentid'));
         if (!$dbman->index_exists($table, $index1)) {
             $dbman->add_index($table, $index1);
