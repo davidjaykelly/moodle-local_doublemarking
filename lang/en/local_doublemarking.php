@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Language strings for the double marking local plugin.
+ * Language strings for the double marking plugin.
  *
  * @package    local_doublemarking
  * @copyright  2025 Your Name <your@email.com>
@@ -31,6 +31,14 @@ $string['doublemarking:mark2'] = 'Act as second marker';
 $string['doublemarking:ratify'] = 'Ratify marks';
 $string['doublemarking:allocate'] = 'Allocate markers';
 $string['doublemarking:manage'] = 'Manage double marking settings';
+
+// Settings strings
+$string['gradedifferencethreshold'] = 'Grade difference threshold';
+$string['gradedifferencethreshold_desc'] = 'Maximum allowed difference between first and second marker grades before notification is triggered';
+$string['defaultblindsetting'] = 'Default blind marking setting';
+$string['defaultblindsetting_desc'] = 'Choose the default blind marking setting for new assignments';
+$string['defaultmarkshidden'] = 'Hide marks by default';
+$string['defaultmarkshidden_desc'] = 'Whether to hide marks from other markers until both have completed their marking by default';
 
 // Settings and form strings
 $string['blindmarking'] = 'Blind marking';
