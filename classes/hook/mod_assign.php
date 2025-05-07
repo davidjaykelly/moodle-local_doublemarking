@@ -18,6 +18,10 @@ namespace local_doublemarking\hook;
 
 defined('MOODLE_INTERNAL') || die();
 
+use core\hook\mod_assign_gradingform_hook;
+use core\hook\mod_assign_userassignment_hook;
+use core\hook\mod_assign_grading_hook;
+
 /**
  * Hook handler for assignment module integration.
  *
@@ -171,5 +175,78 @@ class mod_assign {
         // Implementation for notification system
         // This would typically create notifications for ratifiers
         // and possibly the markers themselves
+    }
+
+    /**
+     * Hook triggered when an assignment is viewed.
+     *
+     * @param \mod_assign\hook\assignment_viewed $hook The hook instance
+     */
+    public static function assignment_viewed(\mod_assign\hook\assignment_viewed $hook) {
+        global $PAGE, $DB;
+        
+        // Only inject our code in the grading view
+        if (strpos($PAGE->url->get_path(), 'mod/assign/view.php') !== false) {
+            $cmid = optional_param('id', 0, PARAM_INT);
+            if ($cmid) {
+                $cm = get_coursemodule_from_id('assign', $cmid);
+                if ($cm) {
+                    $assignmentid = $cm->instance;
+                    
+                    // Check if double marking is enabled for this assignment
+                    $hasDoubleMarking = $DB->record_exists('local_doublemarking_alloc', [
+                        'assignmentid' => $assignmentid,
+                        'userid' => 0 // Global setting for this assignment
+                    ]);
+                    
+                    if ($hasDoubleMarking) {
+                        $PAGE->requires->js_call_amd('local_doublemarking/grading', 'init', [
+                            'assignmentid' => $assignmentid,
+                            'contextid' => $PAGE->context->id
+                        ]);
+                        $PAGE->requires->css('/local/doublemarking/styles/style.css');
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * Handle before render grading panel event.
+     *
+     * @param \mod_assign\hook\before_render_gradingpanel $hook
+     */
+    public static function before_render_gradingpanel(\mod_assign\hook\before_render_gradingpanel $hook) {
+        global $PAGE, $DB;
+        
+        $context = $hook->get_context();
+        $userid = $hook->get_userid();
+        $assignment = $hook->get_instance();
+        
+        // Check if this assignment has double marking enabled
+        $allocation = $DB->get_record('local_doublemarking_alloc', [
+            'assignmentid' => $assignment->id,
+            'userid' => $userid
+        ]);
+        
+        if (!$allocation) {
+            return;
+        }
+        
+        // Add our AMD module and styles
+        $PAGE->requires->js_call_amd('local_doublemarking/grading', 'init', [
+            'assignmentid' => $assignment->id,
+            'userid' => $userid,
+            'contextid' => $context->id
+        ]);
+        $PAGE->requires->css('/local/doublemarking/styles/style.css');
+        
+        // Add our templates to the grading panel
+        $output = $PAGE->get_renderer('local_doublemarking');
+        $hook->add_content($output->render_grading_panel_extension([
+            'assignment' => $assignment,
+            'userid' => $userid,
+            'allocation' => $allocation
+        ]));
     }
 }

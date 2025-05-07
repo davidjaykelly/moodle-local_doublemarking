@@ -1,0 +1,33 @@
+{
+  "name": "moodle-local_doublemarking",
+  "version": "0.1.0",
+  "description": "Double marking plugin for Moodle assignments",
+  "private": true,
+  "scripts": {
+    "start": "grunt",
+    "build": "grunt amd",
+    "watch": "grunt watch",
+    "lint": "grunt eslint",
+    "test": "grunt"
+  },
+  "devDependencies": {
+    "eslint": "^8.40.0",
+    "eslint-plugin-promise": "^6.6.0",
+    "grunt": "^1.6.1",
+    "grunt-cli": "^1.4.3",
+    "grunt-contrib-clean": "^2.0.1",
+    "grunt-contrib-uglify": "^5.2.2",
+    "grunt-contrib-watch": "^1.1.0",
+    "grunt-eslint": "^24.1.0",
+    "grunt-stylelint": "^0.18.0",
+    "semver": "^7.5.0",
+    "stylelint": "^14.16.1",
+    "stylelint-config-standard": "^29.0.0"
+  },
+  "engines": {
+    "node": ">=16.15.0 <21.0.0"
+  },
+  "overrides": {
+    "stylelint": "^14.16.1"
+  }
+}

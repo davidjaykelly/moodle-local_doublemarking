@@ -56,6 +56,7 @@ function local_doublemarking_coursemodule_edit_post_actions($data) {
         // Prepare record for insertion/update
         $record = new \stdClass();
         $record->assignmentid = $assignmentid;
+        $record->userid = 0; // Use 0 for assignment-level settings
         $record->blindsetting = isset($data->blindsetting) ? (int)$data->blindsetting : 0;
         $record->markshidden = !empty($data->markshidden) ? 1 : 0;
         $record->timemodified = time();
@@ -63,7 +64,7 @@ function local_doublemarking_coursemodule_edit_post_actions($data) {
         debugging('Prepared record: ' . var_export($record, true), DEBUG_DEVELOPER);
 
         // Check if record exists
-        $existing = $DB->get_record('local_doublemarking_alloc', ['assignmentid' => $assignmentid]);
+        $existing = $DB->get_record('local_doublemarking_alloc', ['assignmentid' => $assignmentid, 'userid' => 0]);
         debugging('Existing record check result: ' . var_export($existing, true), DEBUG_DEVELOPER);
         
         if ($existing) {

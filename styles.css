@@ -1,0 +1,179 @@
+/* Double Marking Styles */
+
+/* Marker Allocation Panel Styles */
+.local-doublemarking-allocation .card,
+.local-doublemarking-grade-status .card,
+.local-doublemarking-ratification .card {
+    border: 1px solid rgba(0, 0, 0, 0.125);
+    border-radius: 0.25rem;
+    margin-bottom: 1rem;
+}
+
+.local-doublemarking-allocation .card-header,
+.local-doublemarking-grade-status .card-header,
+.local-doublemarking-ratification .card-header {
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 0.75rem 1.25rem;
+}
+
+.local-doublemarking-allocation .card-body,
+.local-doublemarking-grade-status .card-body,
+.local-doublemarking-ratification .card-body {
+    padding: 1.25rem;
+}
+
+.local-doublemarking-allocation .userpicture {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 10px;
+    vertical-align: middle;
+}
+
+.marker-details {
+    margin-top: 1rem;
+}
+
+.marker-details h6 {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+/* Grade Status Indicators */
+.marking-status .alert {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+}
+
+.marking-status .alert-info {
+    color: #0c5460;
+    background-color: #d1ecf1;
+    border-color: #bee5eb;
+}
+
+.marking-status .alert-warning {
+    color: #856404;
+    background-color: #fff3cd;
+    border-color: #ffeeba;
+}
+
+.marking-status .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+}
+
+.marking-status .alert-success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+}
+
+/* Grade Details */
+.grade-details .grade-value {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.grade-difference {
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border-radius: 0.25rem;
+}
+
+.grade-diff-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.grade-diff-value.text-danger {
+    color: #dc3545;
+}
+
+/* Ratification Panel Controls */
+.local-doublemarking-ratification .form-check {
+    padding-left: 1.5rem;
+}
+
+.local-doublemarking-ratification .form-group {
+    margin-bottom: 1rem;
+}
+
+.local-doublemarking-ratification .form-control {
+    display: block;
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.local-doublemarking-ratification .btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.local-doublemarking-ratification .btn-primary:hover {
+    color: #fff;
+    background-color: #0069d9;
+    border-color: #0062cc;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .marker-details .col-md-6 {
+        margin-bottom: 1rem;
+    }
+    
+    .grade-details .col-md-6 {
+        margin-bottom: 1rem;
+    }
+    
+    .local-doublemarking-ratification .btn {
+        display: block;
+        width: 100%;
+    }
+}
+
+/* Blind Marking Specific Styles */
+.blind-marking .marker-allocation .marker-identity {
+    font-style: italic;
+    color: #6c757d;
+}
+
+/* Highlighting for current user when assigned as marker */
+.marker-allocation .alert-info {
+    margin-bottom: 1rem;
+}
+
+/* Grade Difference Warnings */
+.grade-warning-critical {
+    background-color: #f8d7da;
+    border-left: 5px solid #dc3545;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.grade-warning-large {
+    background-color: #fff3cd;
+    border-left: 5px solid #ffc107;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+}
+
+.grade-warning-moderate {
+    background-color: #d1ecf1;
+    border-left: 5px solid #17a2b8;
+    padding: 0.75rem;
+    margin-top: 0.5rem;
+}
+

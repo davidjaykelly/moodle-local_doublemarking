@@ -1,5 +1,63 @@
 # Moodle Double Marking Plugin
 
+This plugin provides double marking functionality for Moodle assignments.
+
+## Features
+
+- Assign multiple markers to student submissions
+- Support for blind and double-blind marking
+- Grade difference detection and warnings
+- Ratification workflow for resolving grade differences
+- Integration with Moodle's grading interface
+
+## Requirements
+
+- Moodle 4.3 or higher
+- mod_assign plugin
+
+## Installation
+
+1. Clone this repository or download it as a zip file
+2. Extract the contents to the `local/doublemarking` directory in your Moodle installation
+3. Visit your Moodle site as an administrator to complete the installation
+
+## Development
+
+### JavaScript Building
+
+This plugin uses AMD modules for JavaScript. To build the JavaScript files:
+
+1. Install Node.js and npm
+2. Run `npm install` in the plugin directory to install dependencies
+3. Run `npm run build` to build the JavaScript files
+
+#### Available npm scripts
+
+- `npm start` - Same as `npm run build`
+- `npm run build` - Build AMD modules
+- `npm run watch` - Watch for changes and rebuild
+- `npm run lint` - Run ESLint to check JavaScript files
+
+## Testing
+
+To run the unit tests:
+
+```bash
+cd /path/to/moodle
+php admin/tool/phpunit/cli/init.php
+vendor/bin/phpunit --testsuite local_doublemarking_testsuite
+```
+
+## License
+
+This plugin is licensed under the GNU GPL v3 or later. See the LICENSE file for details.
+
+## Credits
+
+Developed by Your Name <your@email.com>
+
+# Moodle Double Marking Plugin
+
 ⚠️ **WORK IN PROGRESS** - This plugin is currently in early development and not ready for production use. Features may be incomplete or change significantly.
 
 A comprehensive double marking solution for Moodle assignments that supports blind marking, grade ratification, and marker allocation workflows.

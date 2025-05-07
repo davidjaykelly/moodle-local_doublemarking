@@ -1,3 +1,26 @@
+# Node.js dependencies
+node_modules/
+
+# Generated AMD JS Files
+amd/build/
+
+# IDE files
+.idea/
+*.iml
+nbproject/
+.vscode/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+.directory
+
+# Other
+npm-debug.log
+.sass-cache/
+.eslintcache
+package-lock.json
+
 # Moodle specific
 /config.php
 /lib/editor/tinymce/extra/tools/temp/

@@ -1,0 +1,226 @@
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_doublemarking/marker_allocation
+
+    Template to display marker allocation information in the grading panel.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * allocation - Object containing allocation information
+      * hasallocation - Whether this user has markers allocated
+      * marker1 - First marker information
+      * marker2 - Second marker information
+      * ismarker1 - Whether the current user is marker1
+      * ismarker2 - Whether the current user is marker2
+      * blindsetting - The blind marking setting (0=none, 1=blind, 2=double-blind)
+      * markshidden - Whether grades are hidden until both markers complete
+      * canviewmarkers - Whether the current user can view marker identities
+}}
+<div class="local-doublemarking-marker-allocation mb-3">
+    <h5 class="mb-2">{{#str}}markeridentities, local_doublemarking{{/str}}</h5>
+    
+    {{#allocation.hasallocation}}
+        {{#allocation.ismarker1}}
+            <div class="alert alert-info" role="alert">
+                {{#str}}youareassignedas, local_doublemarking, {{#str}}marker1, local_doublemarking{{/str}}{{/str}}
+            </div>
+        {{/allocation.ismarker1}}
+        
+        {{#allocation.ismarker2}}
+            <div class="alert alert-info" role="alert">
+                {{#str}}youareassignedas, local_doublemarking, {{#str}}marker2, local_doublemarking{{/str}}{{/str}}
+            </div>
+        {{/allocation.ismarker2}}
+        
+        <div class="marker-details">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <h6>{{#str}}marker1, local_doublemarking{{/str}}</h6>
+                        {{#allocation.marker1}}
+                            {{#allocation.canviewmarkers}}
+                                <div class="marker-identity">
+                                    {{#profileimageurl}}
+                                        <img src="{{profileimageurl}}" class="userpicture" alt="{{fullname}}">
+                                    {{/profileimageurl}}
+                                    <span>{{fullname}}</span>
+                                </div>
+                            {{/allocation.canviewmarkers}}
+                            {{^allocation.canviewmarkers}}
+                                <div class="marker-identity hidden" aria-label="{{#str}}a11y_markerhidden, local_doublemarking{{/str}}">
+                                    <span>{{#str}}anonymousmarker, local_doublemarking, 1{{/str}}</span>
+                                </div>
+                            {{/allocation.canviewmarkers}}
+                        {{/allocation.marker1}}
+                        {{^allocation.marker1}}
+                            <span class="text-muted">{{#str}}notassigned, local_doublemarking{{/str}}</span>
+                        {{/allocation.marker1}}
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <h6>{{#str}}marker2, local_doublemarking{{/str}}</h6>
+                        {{#allocation.marker2}}
+                            {{#allocation.canviewmarkers}}
+                                <div class="marker-identity">
+                                    {{#profileimageurl}}
+                                        <img src="{{profileimageurl}}" class="userpicture" alt="{{fullname}}">
+                                    {{/profileimageurl}}
+                                    <span>{{fullname}}</span>
+                                </div>
+                            {{/allocation.canviewmarkers}}
+                            {{^allocation.canviewmarkers}}
+                                <div class="marker-identity hidden" aria-label="{{#str}}a11y_markerhidden, local_doublemarking{{/str}}">
+                                    <span>{{#str}}anonymousmarker, local_doublemarking, 2{{/str}}</span>
+                                </div>
+                            {{/allocation.canviewmarkers}}
+                        {{/allocation.marker2}}
+                        {{^allocation.marker2}}
+                            <span class="text-muted">{{#str}}notassigned, local_doublemarking{{/str}}</span>
+                        {{/allocation.marker2}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        {{#allocation.canviewmarkers}}
+            <div class="mb-2 text-right">
+                <button class="btn btn-sm btn-secondary toggle-marker-visibility">
+                    {{#str}}showmarkers, local_doublemarking{{/str}}
+                </button>
+            </div>
+        {{/allocation.canviewmarkers}}
+    {{/allocation.hasallocation}}
+    
+    {{^allocation.hasallocation}}
+        <div class="alert alert-warning" role="alert">
+            {{#str}}nomarkerallocations, local_doublemarking{{/str}}
+        </div>
+    {{/allocation.hasallocation}}
+</div>
+
+{{!
+    This file is part of Moodle - http://moodle.org/
+
+    Moodle is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_doublemarking/marker_allocation
+
+    Template to display marker allocation information in the grading panel.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * hasallocation - Whether this user has markers allocated
+    * marker1 - First marker information (object with id, fullname, profileimageurl)
+    * marker2 - Second marker information (object with id, fullname, profileimageurl)
+    * ismarker1 - Whether the current user is marker1
+    * ismarker2 - Whether the current user is marker2
+    * blindsetting - The blind marking setting (0=none, 1=blind, 2=double-blind)
+    * markshidden - Whether grades are hidden until both markers complete
+    * canviewmarkers - Whether the current user can view marker identities
+}}
+<div class="local-doublemarking-allocation mb-3">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">{{#str}}markeridentities, local_doublemarking{{/str}}</h5>
+        </div>
+        <div class="card-body">
+            {{#hasallocation}}
+                <div class="marker-allocation">
+                    {{#ismarker1}}
+                        <div class="alert alert-info">
+                            {{#str}}youareassignedas, local_doublemarking, {{#str}}marker1, local_doublemarking{{/str}}{{/str}}
+                        </div>
+                    {{/ismarker1}}
+                    {{#ismarker2}}
+                        <div class="alert alert-info">
+                            {{#str}}youareassignedas, local_doublemarking, {{#str}}marker2, local_doublemarking{{/str}}{{/str}}
+                        </div>
+                    {{/ismarker2}}
+                    
+                    <div class="marker-details">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h6>{{#str}}marker1, local_doublemarking{{/str}}</h6>
+                                {{#marker1}}
+                                    {{#canviewmarkers}}
+                                        {{#profileimageurl}}
+                                            <img src="{{profileimageurl}}" class="userpicture" alt="{{fullname}}">
+                                        {{/profileimageurl}}
+                                        <span>{{fullname}}</span>
+                                    {{/canviewmarkers}}
+                                    {{^canviewmarkers}}
+                                        <span>{{#str}}anonymousmarker, local_doublemarking, 1{{/str}}</span>
+                                    {{/canviewmarkers}}
+                                {{/marker1}}
+                                {{^marker1}}
+                                    <span class="text-muted">{{#str}}notassigned, local_doublemarking{{/str}}</span>
+                                {{/marker1}}
+                            </div>
+                            <div class="col-md-6">
+                                <h6>{{#str}}marker2, local_doublemarking{{/str}}</h6>
+                                {{#marker2}}
+                                    {{#canviewmarkers}}
+                                        {{#profileimageurl}}
+                                            <img src="{{profileimageurl}}" class="userpicture" alt="{{fullname}}">
+                                        {{/profileimageurl}}
+                                        <span>{{fullname}}</span>
+                                    {{/canviewmarkers}}
+                                    {{^canviewmarkers}}
+                                        <span>{{#str}}anonymousmarker, local_doublemarking, 2{{/str}}</span>
+                                    {{/canviewmarkers}}
+                                {{/marker2}}
+                                {{^marker2}}
+                                    <span class="text-muted">{{#str}}notassigned, local_doublemarking{{/str}}</span>
+                                {{/marker2}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {{/hasallocation}}
+            {{^hasallocation}}
+                <div class="alert alert-warning">
+                    {{#str}}nomarkerallocations, local_doublemarking{{/str}}
+                </div>
+            {{/hasallocation}}
+        </div>
+    </div>
+</div>
+

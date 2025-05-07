@@ -28,21 +28,36 @@ $hooks = [
     [
         'hook' => '\\mod_assign\\hook\\submission_form_viewed',
         'callback' => '\\local_doublemarking\\hook\\mod_assign::submission_form_viewed',
+        'priority' => 200
     ],
     [
         'hook' => '\\mod_assign\\hook\\grading_form_viewed',
         'callback' => '\\local_doublemarking\\hook\\mod_assign::grading_form_viewed',
+        'priority' => 200
     ],
     [
         'hook' => '\\mod_assign\\hook\\before_save_grade',
         'callback' => '\\local_doublemarking\\hook\\mod_assign::before_save_grade',
+        'priority' => 200
     ],
     [
         'hook' => '\\mod_assign\\hook\\after_save_grade',
         'callback' => '\\local_doublemarking\\hook\\mod_assign::after_save_grade',
+        'priority' => 200
     ],
     [
         'hook' => '\\core\\hook\\output\\before_http_headers',
         'callback' => '\\local_doublemarking\\hook\\mod_assign::before_http_headers',
+        'priority' => 200
     ],
+    [
+        'hook' => '\\mod_assign\\hook\\assignment_viewed',
+        'callback' => '\\local_doublemarking\\hook\\mod_assign::assignment_viewed',
+        'priority' => 200
+    ],
+    [
+        'hook' => '\\mod_assign\\hook\\before_render_gradingpanel',
+        'callback' => '\\local_doublemarking\\hook\\mod_assign::before_render_gradingpanel',
+        'priority' => 200
+    ]
 ];

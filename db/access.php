@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Capability definitions for the double marking local plugin.
+ * Capability definitions for the double marking plugin.
  *
  * @package    local_doublemarking
  * @copyright  2025 Your Name <your@email.com>
@@ -34,7 +34,6 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW
         )
     ),
-
     'local/doublemarking:mark2' => array(
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'write',
@@ -44,7 +43,6 @@ $capabilities = array(
             'editingteacher' => CAP_ALLOW
         )
     ),
-
     'local/doublemarking:ratify' => array(
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'write',
@@ -54,7 +52,6 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-
     'local/doublemarking:allocate' => array(
         'riskbitmask' => RISK_PERSONAL,
         'captype' => 'write',
@@ -64,7 +61,32 @@ $capabilities = array(
             'manager' => CAP_ALLOW
         )
     ),
-
+    'local/doublemarking:viewgrades' => array(
+        'riskbitmask' => RISK_PERSONAL,
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
+    'local/doublemarking:viewmarkers' => array(
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => array(
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
+    'local/doublemarking:viewdifferences' => array(
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => array(
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW
+        )
+    ),
     'local/doublemarking:manage' => array(
         'riskbitmask' => RISK_PERSONAL | RISK_CONFIG,
         'captype' => 'write',

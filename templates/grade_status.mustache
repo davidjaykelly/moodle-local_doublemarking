@@ -1,0 +1,134 @@
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Moodle is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
+}}
+{{!
+    @template local_doublemarking/grade_status
+
+    Template to display grade status information for the double marking process.
+
+    Classes required for JS:
+    * none
+
+    Data attributes required for JS:
+    * none
+
+    Context variables required for this template:
+    * marker1grade - Grade from first marker (null if not graded)
+    * marker2grade - Grade from second marker (null if not graded)
+    * marker1timemodified - Time when first marker graded
+    * marker2timemodified - Time when second marker graded
+    * canviewgrades - Whether the current user can view both markers' grades
+    * gradedifference - Difference between marker grades
+    * thresholdexceeded - Whether the grade difference exceeds the threshold
+    * isratifier - Whether the current user is a ratifier
+}}
+<div class="local-doublemarking-grade-status mb-3">
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title">{{#str}}markergrades, local_doublemarking{{/str}}</h5>
+        </div>
+        <div class="card-body">
+            {{! Status indicators for marking progress }}
+            <div class="marking-status">
+                {{^marker1grade}}
+                    <div class="alert alert-warning">
+                        {{#str}}awaitingmarker1, local_doublemarking{{/str}}
+                    </div>
+                {{/marker1grade}}
+                {{#marker1grade}}
+                    {{^marker2grade}}
+                        <div class="alert alert-warning">
+                            {{#str}}awaitingmarker2, local_doublemarking{{/str}}
+                        </div>
+                    {{/marker2grade}}
+                {{/marker1grade}}
+                
+                {{#marker1grade}}
+                    {{#marker2grade}}
+                        {{#thresholdexceeded}}
+                            <div class="alert alert-danger">
+                                {{#str}}gradedisagreement, local_doublemarking{{/str}}
+                                {{#isratifier}}
+                                    <div class="mt-2">
+                                        {{#str}}awaitingratification, local_doublemarking{{/str}}
+                                    </div>
+                                {{/isratifier}}
+                            </div>
+                        {{/thresholdexceeded}}
+                        {{^thresholdexceeded}}
+                            <div class="alert alert-success">
+                                {{#str}}markingcomplete, local_doublemarking{{/str}}
+                            </div>
+                        {{/thresholdexceeded}}
+                    {{/marker2grade}}
+                {{/marker1grade}}
+            </div>
+            
+            {{! Grade details section }}
+            {{#canviewgrades}}
+                <div class="grade-details">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h6>{{#str}}marker1, local_doublemarking{{/str}} {{#str}}grade, core{{/str}}</h6>
+                            {{#marker1grade}}
+                                <div class="grade-value">{{marker1grade}}</div>
+                                <div class="text-muted small">
+                                    {{#marker1timemodified}}
+                                        {{#userdate}}{{marker1timemodified}}, {{#str}}strftimedatetime, core_langconfig{{/str}}{{/userdate}}
+                                    {{/marker1timemodified}}
+                                </div>
+                            {{/marker1grade}}
+                            {{^marker1grade}}
+                                <span class="text-muted">{{#str}}notgraded, local_doublemarking{{/str}}</span>
+                            {{/marker1grade}}
+                        </div>
+                        <div class="col-md-6">
+                            <h6>{{#str}}marker2, local_doublemarking{{/str}} {{#str}}grade, core{{/str}}</h6>
+                            {{#marker2grade}}
+                                <div class="grade-value">{{marker2grade}}</div>
+                                <div class="text-muted small">
+                                    {{#marker2timemodified}}
+                                        {{#userdate}}{{marker2timemodified}}, {{#str}}strftimedatetime, core_langconfig{{/str}}{{/userdate}}
+                                    {{/marker2timemodified}}
+                                </div>
+                            {{/marker2grade}}
+                            {{^marker2grade}}
+                                <span class="text-muted">{{#str}}notgraded, local_doublemarking{{/str}}</span>
+                            {{/marker2grade}}
+                        </div>
+                    </div>
+                    
+                    {{#marker1grade}}
+                        {{#marker2grade}}
+                            <div class="grade-difference mt-3">
+                                <h6>{{#str}}gradedifference, local_doublemarking{{/str}}</h6>
+                                <div class="grade-diff-value {{#thresholdexceeded}}text-danger{{/thresholdexceeded}}">
+                                    {{gradedifference}}
+                                </div>
+                                {{#thresholdexceeded}}
+                                    <div class="alert alert-danger mt-2">
+                                        {{#str}}gradingwarning_critical, local_doublemarking, {{gradedifference}}{{/str}}
+                                    </div>
+                                {{/thresholdexceeded}}
+                            </div>
+                        {{/marker2grade}}
+                    {{/marker1grade}}
+                </div>
+            {{/canviewgrades}}
+            {{^canviewgrades}}
+                <div class="alert alert-info">
+                    {{#str}}gradesonlyvisiblewhencomplete, local_doublemarking{{/str}}
+                </div>
+            {{/canviewgrades}}
+        </div>
+    </div>
+</div>
+
